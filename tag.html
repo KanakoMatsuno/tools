@@ -26,7 +26,6 @@ font-weight: 600;
 }
 #changeT input{
   margin-bottom:1em;
-
 }
 </style>
 </head>
@@ -61,40 +60,32 @@ font-weight: 600;
 <input type="button" value="囲い数字表示" onclick="setNum()">
 <input type="button" value="ギリシャ文字表示" onclick="setGreek()">
 <input type="button" value="選択" onclick="getA()">
+<label>
+<input type="radio" name="cOi" value="class" onchange="setA(this.value)">class</radio>
+</label>
+<label>
+<input type="radio" name="cOi" value="id" onchange="setA(this.value)">id</radio>
+</label>
 <input type="button" value="出力" onclick="outS()">
+<input type="button" value="出力リセット" onclick="RA()">
+<input type="button" value="今日の日付" onclick="toDay();">
 </p>
 <textarea id="textA"></textarea>
 </form>
 <script>
-function outS(){
-var sourceT = document.getElementById('textB').value;
-var head = document.getElementById('textH').value;
-var first = document.getElementById('textF').value;
-var last = document.getElementById('textL').value;
-var tail = document.getElementById('textT').value;
-sourceT = repl(sourceT);
-head = repl(head);
-first = repl(first);
-last = repl(last);
-tail = repl(tail);
-sourceT = sourceT.replace(/\n/g, last+"\n"+first);
-if(head != ""){
-document.getElementById("textA").innerHTML += head+"\n"+first+sourceT+last+"\n"+tail+"\n";
+/*
+let online = navigator.onLine;
+if(online===true){
+alert("オンライン");
+}*/
+var sizeBP = window.matchMedia('(max-width:768px)');
+if(sizeBP.matches){
+document.querySelector('body').style.cssText = "background-color:#000;color:#fff";
 }else{
-document.getElementById("textA").innerHTML += first+sourceT+last+tail+"\n";
-}getA();
-}
-function repl(x){
-x = x.replace(/&/g,'&amp;');
-x = x.replace(/</g,'&lt;');
-x = x.replace(/>/g,'&gt;');
-x = x.replace(/"/g,'&quot;');
-x = x.replace(/'/g,"&#39;");
-return x;
+document.querySelector('body').style.cssText = "background-color:#fff;color:#000";
 }
 function headN(n){
 document.getElementById('textH').value="";
-//var headV = document.getElementsByName('hName')[0].value;
 document.getElementById('textF').value=`<${n}>`;
 document.getElementById('textL').value=`</${n}>`;
 document.getElementById('textT').value="";
@@ -125,13 +116,12 @@ function setGreek(){
 `;
 }
 function resetA(){
+//window.location.reload();
 document.getElementById('textB').value="";
 document.getElementById('textH').value="";
 document.getElementById('textF').value="";
 document.getElementById('textL').value="";
 document.getElementById('textT').value="";
-document.getElementById('textA').value="";
-window.location.reload();
 }
 function setArt(){
 document.getElementById('textH').value='<article><section>';
@@ -139,7 +129,6 @@ document.getElementById('textF').value="<div>";
 document.getElementById('textL').value="</div>";
 document.getElementById('textT').value="</section></article>";
 }
-
 function setT(){
 document.getElementById('textH').value="<table>";
 document.getElementById('textF').value="<tr><th>";
@@ -170,10 +159,60 @@ document.getElementById('textF').value="<div>";
 document.getElementById('textL').value="</div>";
 document.getElementById('textT').value="</div>";
 }
+function setA(a){
+let head = document.getElementById('textH').value;
+head = head.replace('>',` ${a}="">`);
+document.getElementById('textH').value= head; 
+}
 function getA(){
 document.getElementById('textA').select();
 document.execCommand('copy');
 }
+function outS(){
+var sourceT = document.getElementById('textB').value;
+var head = document.getElementById('textH').value;
+var first = document.getElementById('textF').value;
+var last = document.getElementById('textL').value;
+var tail = document.getElementById('textT').value;
+sourceT = repl(sourceT);
+head = repl(head);
+first = repl(first);
+last = repl(last);
+tail = repl(tail);
+sourceT = sourceT.replace(/\n/g, last+"\n"+first);
+if(head != ""){
+document.getElementById("textA").innerHTML += head+"\n"+first+sourceT+last+"\n"+tail+"\n";
+}else{
+document.getElementById("textA").innerHTML += first+sourceT+last+tail+"\n";
+}getA();
+}
+function repl(x){
+x = x.replace(/&/g,'&amp;');
+x = x.replace(/</g,'&lt;');
+x = x.replace(/>/g,'&gt;');
+x = x.replace(/"/g,'&quot;');
+x = x.replace(/'/g,"&#39;");
+return x;
+}
+function RA(){
+document.getElementById('textA').innerHTML="";
+}
+function toDay(){
+let today = new Date();
+let year = today.getFullYear();
+let month = today.getMonth()+1;
+let day = today.getDate();
+let time = today.getHours();
+let minute = today.getMinutes();
+let seconds = today.getSeconds();
+document.getElementById("textA").innerHTML = "<h2>" + year+"年"+month+"月"+day+"日"+time+":"+minute+":"+seconds + "</h2>";
+getA();
+}
+textA.addEventListener('keyup',function(){
+let currentText = textA.value.length;
+alert(currentText+'文字');
+reutrn;
+});
 </script>
 </body>
 </html>
