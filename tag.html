@@ -205,7 +205,7 @@ let day = today.getDate();
 let time = today.getHours();
 let minute = today.getMinutes();
 let seconds = today.getSeconds();
-document.getElementById("textA").innerHTML = "<h2>" + year+"年"+month+"月"+day+"日"+time+":"+minute+":"+seconds + "</h2>";
+document.getElementById("textA").innerHTML = year+"年"+month+"月"+day+"日"+time+":"+minute+":"+seconds;
 getA();
 }
 textA.addEventListener('keyup',function(){
