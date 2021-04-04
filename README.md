@@ -1,7 +1,7 @@
 # tools
 It's tool to creat HTML code per row.
 For remote work, for personal use, take it easy and enjoy it.
-Free for download. But please do not lie about author and don't sell, don't buy from others this program.
+Free for download. But please do not lie about author and don't sell, don't buy from others and don't use this program for benefit web site.
 This is Kanako Matsuno writing.
 README.me was deleted onece but this licence adopted from November 25 2020.
 I first created this program in 2019.
