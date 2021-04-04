@@ -55,6 +55,7 @@ font-weight: 600;
 <input type="button" value="table先頭列セット" onclick="setT()">
 <input type="button" value="ul" onclick="setUl()">
 <input type="button" value="dl" onclick="setDl()">
+<input type="button" value="a" onclick="setAnchor()">
 <input type="button" value="article section" onclick="setArt()">
 <input type="button" value="div divセット" onclick="setDiv()">
 <input type="button" value="囲い数字表示" onclick="setNum()">
@@ -147,10 +148,10 @@ document.getElementById('textF').value="<dt>";
 document.getElementById('textL').value="</dt><dd></dd>";
 document.getElementById('textT').value="</dl>";
 }
-function setSpan(){
+function setAnchor(){
 document.getElementById('textH').value="";
-document.getElementById('textF').value="<span>";
-document.getElementById('textL').value="</span>";
+document.getElementById('textF').value='<a href="" target="_blank" rel="noopener">';
+document.getElementById('textL').value="</a>";
 document.getElementById('textT').value="";
 }
 function setDiv(){
@@ -205,7 +206,7 @@ let day = today.getDate();
 let time = today.getHours();
 let minute = today.getMinutes();
 let seconds = today.getSeconds();
-document.getElementById("textA").innerHTML = year+"年"+month+"月"+day+"日"+time+":"+minute+":"+seconds;
+document.getElementById("textA").innerHTML = "<>" + year+"年"+month+"月"+day+"日 "+time+":"+minute+":"+seconds + "</>";
 getA();
 }
 textA.addEventListener('keyup',function(){
